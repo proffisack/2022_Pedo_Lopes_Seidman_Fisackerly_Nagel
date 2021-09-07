@@ -1,0 +1,54 @@
+---
+title: "WNBA Self-Presentation Data Analysis"
+authors: "Wil Fisackerly, Alexia Pedo Lopes, Michael Seidman, Dr. Mark Nagel"
+date: "September 7, 2021"
+output: html_notebook
+---
+
+```{r}
+rm(list = ls())
+
+library(here)
+library(tidyverse)
+
+```
+
+
+Let's start by loading in the data
+
+```{r}
+
+demographics <- read.csv(here("Data","0_Demographics.csv"))
+
+coding <- read.csv(here("Data","1_Combined_Coding.csv"), skip = 5)
+
+# Indicate factors
+
+coding$Category.coding.step.1
+
+coding$Category.coding.step.1 <- as_factor(coding$Category.coding.step.1)
+
+# Let's remove the excess columns that we don't need
+
+# coding <- 
+
+merged <- left_join(demographics, coding, by = "Name")
+
+# Remove Gray, Reshanda, Gustafson, Megan, Holmes, Joyner, Perry, Chelsey, 
+# Samuelson, Karlie, Walker-Kimbrough, Shatori,
+
+merged <- merged %>%
+  filter(Use == 0)
+
+# Let's start with Frequency of codes
+
+ggplo
+
+
+
+
+
+
+
+```
+
