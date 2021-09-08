@@ -3,7 +3,7 @@
     "path": "~/Documents/2022_Pedo_Lopes_Seidman_Fisackerly_Nagel/2022_Pedo_Lopes_Seidman_Fisackerly_Nagel/Data Analysis.Rmd",
     "project_path": "Data Analysis.Rmd",
     "type": "r_markdown",
-    "hash": "2281536366",
+    "hash": "2627673366",
     "contents": "",
     "dirty": false,
     "created": 1631051529937.0,
@@ -14,15 +14,15 @@
         "chunk_output_type": "inline",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "26,29",
-        "scrollLine": "15"
+        "cursorPosition": "149,0",
+        "scrollLine": "87"
     },
     "folds": "",
-    "lastKnownWriteTime": 1631055048,
+    "lastKnownWriteTime": 1631061368,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1631055048790,
+    "last_content_update": 1631061368607,
     "read_only": false,
     "read_only_alternatives": []
 }

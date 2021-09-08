@@ -20,30 +20,146 @@ Let's start by loading in the data
 
 demographics <- read.csv(here("Data","0_Demographics.csv"))
 
-coding <- read.csv(here("Data","1_Combined_Coding.csv"), skip = 5)
+# Clean data and indicate factors
 
-# Indicate factors
+demographics$Position[demographics$Position == "F/C"] <- "C/F"
+demographics$Position[demographics$Position == "G/F"] <- "F/G"
 
-coding$Category.coding.step.1
+demographics$Position <- as_factor(demographics$Position)
 
-coding$Category.coding.step.1 <- as_factor(coding$Category.coding.step.1)
+# Birthday data is not cleaned, however age accomplishes the goal and we may
+# look at this further, later
 
-# Let's remove the excess columns that we don't need
+demographics$Nationality <- as_factor(demographics$Nationality)
 
-# coding <- 
+demographics$Domestic.International <- as_factor(demographics$Domestic.International)
 
+demographics$Current.WNBA.Team..or.Last. <- as_factor(demographics$Current.WNBA.Team..or.Last.)
+
+demographics$Draft.Year <- as.integer(demographics$Draft.Year)
+
+demographics$Active.2021[demographics$Active.2021 == "Y"] <- "Yes"
+demographics$Active.2021[demographics$Active.2021 == "N"] <- "No"
+
+demographics$Active.2021 <- as_factor(demographics$Active.2021)
+
+demographics$Played.in.2020.[demographics$Played.in.2020. == "y"] <- "Yes"
+demographics$Played.in.2020.[demographics$Played.in.2020. == "N"] <- "No"
+demographics$Played.in.2020.[demographics$Played.in.2020. == "Y"] <- "Yes"
+
+demographics$Played.in.2020. <- as_factor(demographics$Played.in.2020.)
+
+demographics <- filter(demographics, Use < 1)
+```
+
+```{r}
+# Reading in coding
+
+coding <- read.csv(here("Data","1_Combined_Coding.csv"), stringsAsFactors = FALSE, fileEncoding = "latin1")
+
+# Clean data and Indicate factors
+
+coding$Likes <- as.numeric(coding$Likes)
+
+# coding$`Number of Likes` <- as.numeric(coding$`Number of Likes`) FIX THIS
+
+coding$Step.1[coding$Step.1 == ""] <- NA
+coding$Step.1[coding$Step.1 == "no cata"] <- NA
+coding$Step.1[coding$Step.1 == "no category"] <- NA
+coding$Step.1[coding$Step.1 == "1"] <- "Personal Life" 
+coding$Step.1[coding$Step.1 == "2"] <- "Business Life" 
+coding$Step.1[coding$Step.1 == "3"] <- "Basketball" 
+coding$Step.1[coding$Step.1 == "4"] <- "Other Sport" 
+coding$Step.1[coding$Step.1 == "5"] <- "Pop Culture or Landmark" 
+coding$Step.1[coding$Step.1 == "6"] <- "Meme"
+
+coding$Step.1 <- as_factor(coding$Step.1)
+
+# Doing the same for step 2
+
+coding$Step.2[coding$Step.2 == "1"] <- "Athlete Action"
+coding$Step.2[coding$Step.2 == "2"] <- "Dressed but Posed"
+coding$Step.2[coding$Step.2 == "3"] <- "Mixed Message"
+coding$Step.2[coding$Step.2 == "4"] <- "Non-Sport Setting"
+coding$Step.2[coding$Step.2 == "5"] <- "Femininity"
+coding$Step.2[coding$Step.2 == "6"] <- "Sexual"
+
+coding$Step.2 <- as_factor(coding$Step.2)
+
+# Social Cause
+
+coding$Social.Cause[coding$Social.Cause == "Y"] <- "Yes"
+coding$Social.Cause[coding$Social.Cause == "y"] <- "Yes"
+coding$Social.Cause[coding$Social.Cause == "N"] <- "No"
+coding$Social.Cause[coding$Social.Cause == "n"] <- "No"
+coding$Social.Cause[coding$Social.Cause == ""] <- NA
+
+coding$Social.Cause <- as_factor(coding$Social.Cause)
+
+```
+
+```{r}
 merged <- left_join(demographics, coding, by = "Name")
 
-# Remove Gray, Reshanda, Gustafson, Megan, Holmes, Joyner, Perry, Chelsey, 
-# Samuelson, Karlie, Walker-Kimbrough, Shatori,
+# Let's start with frequency of codes
 
-merged <- merged %>%
-  filter(Use == 0)
+Step_1_frequencies <- merged %>%
+  drop_na(Step.1) %>%
+  ggplot(aes(Step.1)) +
+  theme_minimal() +
+  geom_bar(fill = "orange", 
+           color = "black") +
+  geom_text(stat = 'count', aes(label = ..count..), hjust = -1) +
+  scale_y_continuous(limits = c(0, 800)) +
+  coord_flip () +
+  labs(x = "Category", 
+       y = "Frequency", 
+       title = "Frequency of Main Content in WNBA Instagram Posts")
 
-# Let's start with Frequency of codes
+Step_1_frequencies
 
-ggplo
+Step_1_Proportions <- merged %>%
+  drop_na(Step.1) %>%
+  ggplot(aes(x = Step.1, y = prop.table(stat(count)),
+             label = scales::percent(prop.table(stat(count))))) +
+  theme_minimal() +
+  geom_bar(position = "dodge") +
+  geom_text(stat = 'count', position = position_dodge(.9), vjust = -.5, size = 3) +
+  labs(x = "Category", 
+       y = "Proportions", 
+       title = "Proportions of Main Content in WNBA Instagram Posts")
+  
+Step_1_Proportions  
 
+Step_2_frequencies <- merged %>%
+  filter(Step.1 == c("Business Life", "Personal Life")) %>%
+  drop_na(Step.2) %>%
+  ggplot(aes(Step.2)) +
+  theme_minimal() +
+  geom_bar(fill = "orange", 
+           color = "black") +
+  geom_text(stat = 'count', aes(label = ..count..), hjust = -1) +
+  scale_y_continuous(limits = c(0, 500)) +
+  coord_flip () +
+  labs(x = "Category", 
+       y = "Frequency", 
+       title = "Frequency of Self-Presentation in Personal and Business Photos")
+
+Step_2_frequencies
+
+Step_2_Proportions <- merged %>%
+  filter(Step.1 == c("Business Life", "Personal Life")) %>%
+  drop_na(Step.2) %>%
+  ggplot(aes(x = Step.2, y = prop.table(stat(count)),
+             label = scales::percent(prop.table(stat(count))))) +
+  theme_minimal() +
+  geom_bar(position = "dodge") +
+  geom_text(stat = 'count', position = position_dodge(.9), vjust = -.5, size = 3) +
+  labs(x = "Category", 
+       y = "Proportions", 
+       title = "Proportions of Self-Presentation in Personal and Business Photos")
+  
+Step_2_Proportions 
 
 
 

@@ -1,8 +1,0 @@
-"0","merged <- merged %>%
-  !filter(""Name"", c(""Gray, Reshanda"", ""Gustafson, Megan"", ""Holmes, Joyner"", 
-                  ""Perry, Chelsey"", ""Samuelson, Karlie"", 
-                  ""Walker-Kimbrough, Shatori""))
-"
-"2","Error in UseMethod(""filter"") : 
-  no applicable method for 'filter' applied to an object of class ""character""
-"

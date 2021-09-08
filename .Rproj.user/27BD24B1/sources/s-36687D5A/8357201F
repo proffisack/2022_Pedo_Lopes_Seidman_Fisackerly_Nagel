@@ -1,12 +1,12 @@
 {
-    "id": "EEB93C55",
+    "id": "8357201F",
     "path": null,
     "project_path": null,
     "type": "r_dataframe",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1631052608431.0,
+    "created": 1631058064468.0,
     "source_on_save": false,
     "relative_order": 3,
     "properties": {
@@ -14,11 +14,11 @@
         "caption": "coding",
         "totalObservations": 1397,
         "displayedObservations": 1397,
-        "variables": 34,
-        "cacheKey": "F0DD8EE6",
+        "variables": 10,
+        "cacheKey": "3072CE38",
         "object": "coding",
         "environment": "",
-        "contentUrl": "grid_resource/gridviewer.html?env=&obj=coding&cache_key=F0DD8EE6&max_cols=50",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=coding&cache_key=3072CE38&max_cols=50",
         "preview": 0,
         "source_window_id": "",
         "Source": "Source"
@@ -28,7 +28,7 @@
     "encoding": "",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1631052608431,
+    "last_content_update": 1631058064468,
     "read_only": false,
     "read_only_alternatives": []
 }
