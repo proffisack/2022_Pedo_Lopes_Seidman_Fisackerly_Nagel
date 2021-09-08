@@ -98,14 +98,14 @@ coding$Social.Cause <- as_factor(coding$Social.Cause)
 
 ```
 
-```{r}
+```{r echo=FALSE}
 merged <- left_join(demographics, coding, by = "Name")
 
 # Let's start with frequency of codes
 
 Step_1_frequencies <- merged %>%
   drop_na(Step.1) %>%
-  ggplot(aes(Step.1)) +
+  ggplot(aes(fct_infreq(Step.1))) +
   theme_minimal() +
   geom_bar(fill = "orange", 
            color = "black") +
@@ -120,10 +120,11 @@ Step_1_frequencies
 
 Step_1_Proportions <- merged %>%
   drop_na(Step.1) %>%
-  ggplot(aes(x = Step.1, y = prop.table(stat(count)),
+  ggplot(aes(x = fct_infreq(Step.1), y = prop.table(stat(count)),
              label = scales::percent(prop.table(stat(count))))) +
   theme_minimal() +
-  geom_bar(position = "dodge") +
+  geom_bar(fill = "orange", 
+           color = "black", position = "dodge") +
   geom_text(stat = 'count', position = position_dodge(.9), vjust = -.5, size = 3) +
   labs(x = "Category", 
        y = "Proportions", 
@@ -134,12 +135,12 @@ Step_1_Proportions
 Step_2_frequencies <- merged %>%
   filter(Step.1 == c("Business Life", "Personal Life")) %>%
   drop_na(Step.2) %>%
-  ggplot(aes(Step.2)) +
+  ggplot(aes(fct_infreq(Step.2))) +
   theme_minimal() +
   geom_bar(fill = "orange", 
            color = "black") +
   geom_text(stat = 'count', aes(label = ..count..), hjust = -1) +
-  scale_y_continuous(limits = c(0, 500)) +
+  scale_y_continuous(limits = c(0, 300)) +
   coord_flip () +
   labs(x = "Category", 
        y = "Frequency", 
@@ -150,10 +151,11 @@ Step_2_frequencies
 Step_2_Proportions <- merged %>%
   filter(Step.1 == c("Business Life", "Personal Life")) %>%
   drop_na(Step.2) %>%
-  ggplot(aes(x = Step.2, y = prop.table(stat(count)),
+  ggplot(aes(x = fct_infreq(Step.2), y = prop.table(stat(count)),
              label = scales::percent(prop.table(stat(count))))) +
   theme_minimal() +
-  geom_bar(position = "dodge") +
+  geom_bar(fill = "orange", 
+           color = "black", position = "dodge") +
   geom_text(stat = 'count', position = position_dodge(.9), vjust = -.5, size = 3) +
   labs(x = "Category", 
        y = "Proportions", 
