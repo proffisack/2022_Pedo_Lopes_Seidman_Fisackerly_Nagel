@@ -5,7 +5,7 @@ date: "September 7, 2021"
 output: html_notebook
 ---
 
-```{r}
+```{r echo=FALSE}
 rm(list = ls())
 
 library(here)
@@ -16,9 +16,9 @@ library(tidyverse)
 
 Let's start by loading in the data
 
-```{r}
+```{r echo=FALSE}
 
-demographics <- read.csv(here("Data","0_Demographics.csv"))
+demographics <- read_csv(here("Data","0_Demographics.csv"))
 
 # Clean data and indicate factors
 
@@ -32,30 +32,34 @@ demographics$Position <- as_factor(demographics$Position)
 
 demographics$Nationality <- as_factor(demographics$Nationality)
 
-demographics$Domestic.International <- as_factor(demographics$Domestic.International)
+demographics$`Domestic/International` <-
+  as_factor(demographics$`Domestic/International`)
 
-demographics$Current.WNBA.Team..or.Last. <- as_factor(demographics$Current.WNBA.Team..or.Last.)
+demographics$`Current WNBA Team (or Last)` <-
+  as_factor(demographics$`Current WNBA Team (or Last)`)
 
-demographics$Draft.Year <- as.integer(demographics$Draft.Year)
+demographics$`Draft Year` <- as.integer(demographics$`Draft Year`)
 
-demographics$Active.2021[demographics$Active.2021 == "Y"] <- "Yes"
-demographics$Active.2021[demographics$Active.2021 == "N"] <- "No"
+# demographics$`Active/2021`[demographics$`Active/2021` == "Y"] <- "Yes"
+# demographics$`Active/2021`[demographics$`Active/2021` == "N"] <- "No"
 
-demographics$Active.2021 <- as_factor(demographics$Active.2021)
+demographics$`Active/2021` <- as.factor(demographics$`Active/2021`)
 
-demographics$Played.in.2020.[demographics$Played.in.2020. == "y"] <- "Yes"
-demographics$Played.in.2020.[demographics$Played.in.2020. == "N"] <- "No"
-demographics$Played.in.2020.[demographics$Played.in.2020. == "Y"] <- "Yes"
+demographics$`Played in 2020?`[demographics$`Played in 2020?` == "y"] <- "Yes"
+demographics$`Played in 2020?`[demographics$`Played in 2020?` == "N"] <- "No"
+demographics$`Played in 2020?`[demographics$`Played in 2020?` == "Y"] <- "Yes"
 
-demographics$Played.in.2020. <- as_factor(demographics$Played.in.2020.)
+demographics$`Played in 2020?` <- as_factor(demographics$`Played in 2020?`)
 
 demographics <- filter(demographics, Use < 1)
 ```
 
-```{r}
+```{r echo=FALSE}
 # Reading in coding
 
-coding <- read.csv(here("Data","1_Combined_Coding.csv"), stringsAsFactors = FALSE, fileEncoding = "latin1")
+coding <- read.csv(here("Data","1_Combined_Coding.csv")
+                   # , stringsAsFactors = FALSE, fileEncoding = "latin1"
+                   )
 
 # Clean data and Indicate factors
 
