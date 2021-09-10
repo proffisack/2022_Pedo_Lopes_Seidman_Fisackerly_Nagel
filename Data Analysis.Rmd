@@ -58,7 +58,7 @@ demographics <- filter(demographics, Use < 1)
 # Reading in coding
 
 coding <- read.csv(here("Data","1_Combined_Coding.csv")
-                   # , stringsAsFactors = FALSE, fileEncoding = "latin1"
+                    , stringsAsFactors = FALSE, fileEncoding = "latin1"
                    )
 
 # Clean data and Indicate factors
@@ -100,6 +100,8 @@ coding$Social.Cause[coding$Social.Cause == ""] <- NA
 
 coding$Social.Cause <- as_factor(coding$Social.Cause)
 
+coding$Athlete.Appear <- as_factor(coding$Athlete.Appear)
+
 ```
 
 ```{r echo=FALSE}
@@ -136,15 +138,17 @@ Step_1_Proportions <- merged %>%
   
 Step_1_Proportions  
 
-Step_2_frequencies <- merged %>%
-  filter(Step.1 == c("Business Life", "Personal Life")) %>%
-  drop_na(Step.2) %>%
+Step_2_merged <- merged %>%
+  filter(Step.1 %in% c('Business Life', 'Personal Life')) %>%
+  drop_na(Step.2)
+
+Step_2_frequencies <- Step_2_merged %>%
   ggplot(aes(fct_infreq(Step.2))) +
   theme_minimal() +
   geom_bar(fill = "orange", 
            color = "black") +
   geom_text(stat = 'count', aes(label = ..count..), hjust = -1) +
-  scale_y_continuous(limits = c(0, 300)) +
+  scale_y_continuous(limits = c(0, 500)) +
   coord_flip () +
   labs(x = "Category", 
        y = "Frequency", 
@@ -152,9 +156,7 @@ Step_2_frequencies <- merged %>%
 
 Step_2_frequencies
 
-Step_2_Proportions <- merged %>%
-  filter(Step.1 == c("Business Life", "Personal Life")) %>%
-  drop_na(Step.2) %>%
+Step_2_Proportions <- Step_2_merged %>%
   ggplot(aes(x = fct_infreq(Step.2), y = prop.table(stat(count)),
              label = scales::percent(prop.table(stat(count))))) +
   theme_minimal() +
@@ -167,10 +169,91 @@ Step_2_Proportions <- merged %>%
   
 Step_2_Proportions 
 
+```
 
+```{r}
 
+# (Pegoraro et al., 2018)
 
+# THIS IS THE FUN STUFF
 
+# Engagement between Step two photos and likes (ANOVA), bivariate correlation
+# between likes and type of photos 
+
+Step.2.anova <-
+  summary(aov(Likes ~ Step.2, data = Step_2_merged))
+
+Step.2.anova
+
+# Tukey comparison
+
+Step.2.tukey <- TukeyHSD((aov(Likes ~ Step.2, data = Step_2_merged)))
+
+Step.2.tukey
+
+# Running a linear model
+
+lm.model <- lm(Step_2_merged$Likes ~ Step_2_merged$Step.2)
+
+summary(lm.model)
+
+# Percent athletes appeared in the photos themselves
+
+# 52.8 business, 36.35 personal, 79.15% photos feature the athletes (INDICATE
+# INTERNATIONAL AND DOMESTIC PERCENTAGES)
+
+# t-test to see if when athlete appeared more like. ANOVA checked the number of 
+# likes to each type of photo (sexually suggestive)
+
+appear_anova <- merged %>%
+  drop_na(Athlete.Appear)
+
+summary(aov(Likes ~ Athlete.Appear, data = appear_anova))
+
+# Running a linear model
+
+lm.model_aa <- lm(appear_anova$Likes ~ appear_anova$Athlete.Appear)
+
+summary(lm.model_aa)
+
+# RUN AN ANALYSIS TO SEE IF NUMBER OF SEASONS/AGE/POSITION/NATIONALITY IMPACTS LIKES (INSTEAD OF GE GENDER
+# DIFFERENCES)
+
+```
+
+ANOVA is highly significant, thus the categories in Step 2 are statistically different in their engagement 
+
+# ANOVA WAS CONDUCTED TO COMPARE THE EFFECT OF SELF-PRESENTATION CATEGORIES OF 
+# ATHLETES' PHOTOS ON THE NUMBER OF LIKES RECEIVED (I.E. ENGAGEMENT). THERE WAS 
+# A SIGNIFICANT DIFFERENCE IN NUMBER OF LIKES RECEIVED ACROSS SELF-PRESENTATION
+# CATEGORIES AT THE p < .05 SIGNIFICANCE LEVEL. NOTE: STEP 2 ONLY CATEGORIZES THE
+# PICTURES IN WHICH ATHLETES WERE PRESENT
+
+# NEED TO LOOK UP HOW TO REPORT TUKEY'S
+
+# THERE ARE STATISTICALLY SIGNIFICANT DIFFERENCES AT THE p < 0.05 LEVEL BETWEEN
+# SEXUAL AND FEMININITY (0.0000), NON-SPORT SETTING AND DRESSED BUT POSED (0.0055),
+# SEXUAL AND DRESSED BUT POSED (0.0000), SEXUAL AND MIXED MESSAGE (0.0000), 
+# NON-SPORT SETTING AND ATHLETE ACTION (0.0055), SEXUAL AND ATHLETE ACTION (0.0000),
+# AND SEXUAL AND NON-SPORT SETTING (0.0000)
+
+# INTERESTINGLY, THE CATEGORY WITH MORE LIKES (I.E., ENGAGEMENT) IS SEXUALLY SUGGESTIVE. # ALONG WITH THAT CATEGORY, FEMINITY AND NON-SPORT SETTING ARE STATISTICALLY SIGNIFICANT # AT THE 0.05 SIGNIFICANCE LEVEL.
+
+# THERE IS A SIGNIFICANT DIFFERENCE AT THE p < .05 LEVEL IN THE NUMBER OF LIKES
+# A POST RECEIVES IF THE ATHLETE IS PRESENT (0.0135). A LINEAR MODEL INDICATED 
+# THAT THERE IS A NEGATIVE CORRELATION BETWEEN THE ATHLETE NOT APPEARING IN THE
+# PHOTO AND THE NUMBER OF LIKES THAT A PHOTO RECEIVES AT THE p < .05 CONFIDENCE
+# LEVEL (0.00635).
+
+```{r}
+
+filter(Step_2_merged, Step.2 == "Sexual")
+
+filter(Step_2_merged, Account == "ecambage") %>%
+  select(Step.2, Likes)
+
+filter(Step_2_merged, Account == "tea.cooper2") %>%
+  select(Step.2, Likes)
 
 ```
 
