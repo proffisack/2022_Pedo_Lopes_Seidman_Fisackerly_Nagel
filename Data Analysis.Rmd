@@ -1,8 +1,9 @@
 ---
 title: "WNBA Self-Presentation Data Analysis"
-authors: "Wil Fisackerly, Alexia Pedo Lopes, Michael Seidman, Dr. Mark Nagel"
+authors: Wil Fisackerly, Alexia Pedo Lopes, Michael Seidman, Dr. Mark Nagel
 date: "September 7, 2021"
-output: html_notebook
+output:
+  html_notebook: default
 ---
 
 ```{r echo=FALSE}
@@ -22,6 +23,8 @@ demographics <- read_csv(here("Data","0_Demographics.csv"))
 
 # Clean data and indicate factors
 
+# Clairified position
+
 demographics$Position[demographics$Position == "F/C"] <- "C/F"
 demographics$Position[demographics$Position == "G/F"] <- "F/G"
 
@@ -38,7 +41,7 @@ demographics$`Domestic/International` <-
 demographics$`Current WNBA Team (or Last)` <-
   as_factor(demographics$`Current WNBA Team (or Last)`)
 
-demographics$`Draft Year` <- as.integer(demographics$`Draft Year`)
+demographics$`Draft Year` <- as.numeric(demographics$`Draft Year`)
 
 # demographics$`Active/2021`[demographics$`Active/2021` == "Y"] <- "Yes"
 # demographics$`Active/2021`[demographics$`Active/2021` == "N"] <- "No"
@@ -256,4 +259,12 @@ filter(Step_2_merged, Account == "tea.cooper2") %>%
   select(Step.2, Likes)
 
 ```
+
+# CREATE A TABLE FOR MEAN NUMBER OF LIKES FOR EACH CATEGORY (STEP 1 AND 2)
+
+# T-test for only two conditions (i.e. athlete appear)
+
+# Nationality
+
+# Position
 

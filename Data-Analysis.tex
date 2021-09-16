@@ -1,0 +1,501 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={WNBA Self-Presentation Data Analysis},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{WNBA Self-Presentation Data Analysis}
+\author{}
+\date{\vspace{-2.5em}September 7, 2021}
+
+\begin{document}
+\maketitle
+
+\begin{verbatim}
+## here() starts at /Users/Wilfifive/Documents/2022_Pedo_Lopes_Seidman_Fisackerly_Nagel/2022_Pedo_Lopes_Seidman_Fisackerly_Nagel
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.4     v purrr   0.3.4
+## v tibble  3.1.2     v dplyr   1.0.7
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+Let's start by loading in the data
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   Name = col_character(),
+##   `Last Name` = col_character(),
+##   `First Name` = col_character(),
+##   Position = col_character(),
+##   `Height (cm.)` = col_double(),
+##   `Weight (kg)` = col_double(),
+##   Birthday = col_character(),
+##   Age = col_double(),
+##   Nationality = col_character(),
+##   `Domestic/International` = col_character(),
+##   College = col_character(),
+##   `Current WNBA Team (or Last)` = col_character(),
+##   `Draft Pick` = col_double(),
+##   `Draft Year` = col_double(),
+##   `Year Started` = col_double(),
+##   `Seasons in League` = col_double(),
+##   `Active/2021` = col_character(),
+##   `Played in 2020?` = col_character(),
+##   Use = col_double()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: NAs introduced by coercion
+\end{verbatim}
+
+\includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-4-1.pdf}
+\includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-4-2.pdf}
+\includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-4-3.pdf}
+\includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-4-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# (Pegoraro et al., 2018)}
+
+\CommentTok{\# THIS IS THE FUN STUFF}
+
+\CommentTok{\# Engagement between Step two photos and likes (ANOVA), bivariate correlation}
+\CommentTok{\# between likes and type of photos }
+
+\NormalTok{Step.}\FloatTok{2.}\NormalTok{anova }\OtherTok{\textless{}{-}}
+  \FunctionTok{summary}\NormalTok{(}\FunctionTok{aov}\NormalTok{(Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Step}\FloatTok{.2}\NormalTok{, }\AttributeTok{data =}\NormalTok{ Step\_2\_merged))}
+
+\NormalTok{Step.}\FloatTok{2.}\NormalTok{anova}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Df    Sum Sq   Mean Sq F value Pr(>F)    
+## Step.2         5 1.336e+11 2.672e+10   41.45 <2e-16 ***
+## Residuals   1179 7.600e+11 6.446e+08                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 6 observations deleted due to missingness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Tukey comparison}
+
+\NormalTok{Step.}\FloatTok{2.}\NormalTok{tukey }\OtherTok{\textless{}{-}} \FunctionTok{TukeyHSD}\NormalTok{((}\FunctionTok{aov}\NormalTok{(Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Step}\FloatTok{.2}\NormalTok{, }\AttributeTok{data =}\NormalTok{ Step\_2\_merged)))}
+
+\NormalTok{Step.}\FloatTok{2.}\NormalTok{tukey}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Likes ~ Step.2, data = Step_2_merged)
+## 
+## $Step.2
+##                                           diff        lwr       upr     p adj
+## Dressed but Posed-Femininity         -580.7839  -9511.083  8349.515 0.9999696
+## Mixed Message-Femininity            -1930.7713 -12437.134  8575.591 0.9952079
+## Athlete Action-Femininity            1070.3085  -8705.728 10846.345 0.9996034
+## Non-Sport Setting-Femininity        -7095.9833 -16177.263  1985.296 0.2245246
+## Sexual-Femininity                   63248.7485  47486.789 79010.708 0.0000000
+## Mixed Message-Dressed but Posed     -1349.9875  -8797.526  6097.551 0.9955074
+## Athlete Action-Dressed but Posed     1651.0924  -4724.883  8027.067 0.9770143
+## Non-Sport Setting-Dressed but Posed -6515.1995 -11764.181 -1266.218 0.0054922
+## Sexual-Dressed but Posed            63829.5323  49918.331 77740.734 0.0000000
+## Athlete Action-Mixed Message         3001.0799  -5442.052 11444.212 0.9131705
+## Non-Sport Setting-Mixed Message     -5165.2120 -12793.136  2462.712 0.3824789
+## Sexual-Mixed Message                65179.5198  50207.715 80151.325 0.0000000
+## Non-Sport Setting-Athlete Action    -8166.2919 -14752.069 -1580.515 0.0055627
+## Sexual-Athlete Action               62178.4399  47709.778 76647.102 0.0000000
+## Sexual-Non-Sport Setting            70344.7318  56336.130 84353.334 0.0000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Running a linear model}
+
+\NormalTok{lm.model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Step}\FloatTok{.2}\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(lm.model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Step_2_merged$Likes ~ Step_2_merged$Step.2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -72625  -9265  -4671  -1098 174826 
+## 
+## Coefficients:
+##                                       Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                            11930.3     2874.8   4.150 3.56e-05 ***
+## Step_2_merged$Step.2Dressed but Posed   -580.8     3128.6  -0.186   0.8528    
+## Step_2_merged$Step.2Mixed Message      -1930.8     3680.8  -0.525   0.6000    
+## Step_2_merged$Step.2Athlete Action      1070.3     3424.9   0.313   0.7547    
+## Step_2_merged$Step.2Non-Sport Setting  -7096.0     3181.5  -2.230   0.0259 *  
+## Step_2_merged$Step.2Sexual             63248.7     5522.0  11.454  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 25390 on 1179 degrees of freedom
+##   (6 observations deleted due to missingness)
+## Multiple R-squared:  0.1495, Adjusted R-squared:  0.1459 
+## F-statistic: 41.45 on 5 and 1179 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Percent athletes appeared in the photos themselves}
+
+\CommentTok{\# 52.8 business, 36.35 personal, 79.15\% photos feature the athletes (INDICATE}
+\CommentTok{\# INTERNATIONAL AND DOMESTIC PERCENTAGES)}
+
+\CommentTok{\# t{-}test to see if when athlete appeared more like. ANOVA checked the number of }
+\CommentTok{\# likes to each type of photo (sexually suggestive)}
+
+\NormalTok{appear\_anova }\OtherTok{\textless{}{-}}\NormalTok{ merged }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(Athlete.Appear)}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{aov}\NormalTok{(Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Athlete.Appear, }\AttributeTok{data =}\NormalTok{ appear\_anova))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  Df    Sum Sq   Mean Sq F value  Pr(>F)   
+## Athlete.Appear    1 5.197e+09 5.197e+09   7.472 0.00635 **
+## Residuals      1329 9.244e+11 6.955e+08                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 6 observations deleted due to missingness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Running a linear model}
+
+\NormalTok{lm.model\_aa }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(appear\_anova}\SpecialCharTok{$}\NormalTok{Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ appear\_anova}\SpecialCharTok{$}\NormalTok{Athlete.Appear)}
+
+\FunctionTok{summary}\NormalTok{(lm.model\_aa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = appear_anova$Likes ~ appear_anova$Athlete.Appear)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -11045  -9496  -7981  -2834 175127 
+## 
+## Coefficients:
+##                                            Estimate Std. Error t value Pr(>|t|)
+## (Intercept)                                 11153.8      765.8  14.565  < 2e-16
+## appear_anova$Athlete.AppearDoes not appear  -6342.0     2320.2  -2.733  0.00635
+##                                               
+## (Intercept)                                ***
+## appear_anova$Athlete.AppearDoes not appear ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 26370 on 1329 degrees of freedom
+##   (6 observations deleted due to missingness)
+## Multiple R-squared:  0.005591,   Adjusted R-squared:  0.004842 
+## F-statistic: 7.472 on 1 and 1329 DF,  p-value: 0.006351
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# RUN AN ANALYSIS TO SEE IF NUMBER OF SEASONS/AGE/POSITION/NATIONALITY IMPACTS LIKES (INSTEAD OF GE GENDER}
+\CommentTok{\# DIFFERENCES)}
+\end{Highlighting}
+\end{Shaded}
+
+ANOVA is highly significant, thus the categories in Step 2 are
+statistically different in their engagement
+
+\hypertarget{anova-was-conducted-to-compare-the-effect-of-self-presentation-categories-of}{%
+\section{ANOVA WAS CONDUCTED TO COMPARE THE EFFECT OF SELF-PRESENTATION
+CATEGORIES
+OF}\label{anova-was-conducted-to-compare-the-effect-of-self-presentation-categories-of}}
+
+\hypertarget{athletes-photos-on-the-number-of-likes-received-i.e.-engagement.-there-was}{%
+\section{ATHLETES' PHOTOS ON THE NUMBER OF LIKES RECEIVED (I.E.
+ENGAGEMENT). THERE
+WAS}\label{athletes-photos-on-the-number-of-likes-received-i.e.-engagement.-there-was}}
+
+\hypertarget{a-significant-difference-in-number-of-likes-received-across-self-presentation}{%
+\section{A SIGNIFICANT DIFFERENCE IN NUMBER OF LIKES RECEIVED ACROSS
+SELF-PRESENTATION}\label{a-significant-difference-in-number-of-likes-received-across-self-presentation}}
+
+\hypertarget{categories-at-the-p-.05-significance-level.-note-step-2-only-categorizes-the}{%
+\section{CATEGORIES AT THE p \textless{} .05 SIGNIFICANCE LEVEL. NOTE:
+STEP 2 ONLY CATEGORIZES
+THE}\label{categories-at-the-p-.05-significance-level.-note-step-2-only-categorizes-the}}
+
+\hypertarget{pictures-in-which-athletes-were-present}{%
+\section{PICTURES IN WHICH ATHLETES WERE
+PRESENT}\label{pictures-in-which-athletes-were-present}}
+
+\hypertarget{need-to-look-up-how-to-report-tukeys}{%
+\section{NEED TO LOOK UP HOW TO REPORT
+TUKEY'S}\label{need-to-look-up-how-to-report-tukeys}}
+
+\hypertarget{there-are-statistically-significant-differences-at-the-p-0.05-level-between}{%
+\section{THERE ARE STATISTICALLY SIGNIFICANT DIFFERENCES AT THE p
+\textless{} 0.05 LEVEL
+BETWEEN}\label{there-are-statistically-significant-differences-at-the-p-0.05-level-between}}
+
+\hypertarget{sexual-and-femininity-0.0000-non-sport-setting-and-dressed-but-posed-0.0055}{%
+\section{SEXUAL AND FEMININITY (0.0000), NON-SPORT SETTING AND DRESSED
+BUT POSED
+(0.0055),}\label{sexual-and-femininity-0.0000-non-sport-setting-and-dressed-but-posed-0.0055}}
+
+\hypertarget{sexual-and-dressed-but-posed-0.0000-sexual-and-mixed-message-0.0000}{%
+\section{SEXUAL AND DRESSED BUT POSED (0.0000), SEXUAL AND MIXED MESSAGE
+(0.0000),}\label{sexual-and-dressed-but-posed-0.0000-sexual-and-mixed-message-0.0000}}
+
+\hypertarget{non-sport-setting-and-athlete-action-0.0055-sexual-and-athlete-action-0.0000}{%
+\section{NON-SPORT SETTING AND ATHLETE ACTION (0.0055), SEXUAL AND
+ATHLETE ACTION
+(0.0000),}\label{non-sport-setting-and-athlete-action-0.0055-sexual-and-athlete-action-0.0000}}
+
+\hypertarget{and-sexual-and-non-sport-setting-0.0000}{%
+\section{AND SEXUAL AND NON-SPORT SETTING
+(0.0000)}\label{and-sexual-and-non-sport-setting-0.0000}}
+
+\hypertarget{interestingly-the-category-with-more-likes-i.e.-engagement-is-sexually-suggestive.-along-with-that-category-feminity-and-non-sport-setting-are-statistically-significant-at-the-0.05-significance-level.}{%
+\section{INTERESTINGLY, THE CATEGORY WITH MORE LIKES (I.E., ENGAGEMENT)
+IS SEXUALLY SUGGESTIVE. \# ALONG WITH THAT CATEGORY, FEMINITY AND
+NON-SPORT SETTING ARE STATISTICALLY SIGNIFICANT \# AT THE 0.05
+SIGNIFICANCE
+LEVEL.}\label{interestingly-the-category-with-more-likes-i.e.-engagement-is-sexually-suggestive.-along-with-that-category-feminity-and-non-sport-setting-are-statistically-significant-at-the-0.05-significance-level.}}
+
+\hypertarget{there-is-a-significant-difference-at-the-p-.05-level-in-the-number-of-likes}{%
+\section{THERE IS A SIGNIFICANT DIFFERENCE AT THE p \textless{} .05
+LEVEL IN THE NUMBER OF
+LIKES}\label{there-is-a-significant-difference-at-the-p-.05-level-in-the-number-of-likes}}
+
+\hypertarget{a-post-receives-if-the-athlete-is-present-0.0135.-a-linear-model-indicated}{%
+\section{A POST RECEIVES IF THE ATHLETE IS PRESENT (0.0135). A LINEAR
+MODEL
+INDICATED}\label{a-post-receives-if-the-athlete-is-present-0.0135.-a-linear-model-indicated}}
+
+\hypertarget{that-there-is-a-negative-correlation-between-the-athlete-not-appearing-in-the}{%
+\section{THAT THERE IS A NEGATIVE CORRELATION BETWEEN THE ATHLETE NOT
+APPEARING IN
+THE}\label{that-there-is-a-negative-correlation-between-the-athlete-not-appearing-in-the}}
+
+\hypertarget{photo-and-the-number-of-likes-that-a-photo-receives-at-the-p-.05-confidence}{%
+\section{PHOTO AND THE NUMBER OF LIKES THAT A PHOTO RECEIVES AT THE p
+\textless{} .05
+CONFIDENCE}\label{photo-and-the-number-of-likes-that-a-photo-receives-at-the-p-.05-confidence}}
+
+\hypertarget{level-0.00635.}{%
+\section{LEVEL (0.00635).}\label{level-0.00635.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(Step\_2\_merged, Step}\FloatTok{.2} \SpecialCharTok{==} \StringTok{"Sexual"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 29 x 29
+##    Name  `Last Name` `First Name` Position `Height (cm.)` `Weight (kg)` Birthday
+##    <chr> <chr>       <chr>        <fct>             <dbl>         <dbl> <chr>   
+##  1 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  2 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  3 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  4 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  5 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  6 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  7 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  8 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  9 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+## 10 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+## # ... with 19 more rows, and 22 more variables: Age <dbl>, Nationality <fct>,
+## #   Domestic/International <fct>, College <chr>,
+## #   Current WNBA Team (or Last) <fct>, Draft Pick <dbl>, Draft Year <int>,
+## #   Year Started <dbl>, Seasons in League <dbl>, Active/2021 <fct>,
+## #   Played in 2020? <fct>, Use <dbl>, Account <chr>, Photo.Date <chr>,
+## #   Likes <dbl>, Step.1 <fct>, Social.Cause <fct>, Caption <chr>, Step.2 <fct>,
+## #   Hashtags <lgl>, User.Tags <lgl>, Athlete.Appear <fct>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(Step\_2\_merged, Account }\SpecialCharTok{==} \StringTok{"ecambage"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Step}\FloatTok{.2}\NormalTok{, Likes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 18 x 2
+##    Step.2      Likes
+##    <fct>       <dbl>
+##  1 Sexual     118110
+##  2 Sexual     118110
+##  3 Sexual     118110
+##  4 Sexual     118110
+##  5 Sexual     118110
+##  6 Sexual      92495
+##  7 Sexual      92495
+##  8 Sexual      92495
+##  9 Sexual     106527
+## 10 Sexual     106527
+## 11 Femininity  95161
+## 12 Femininity  47616
+## 13 Femininity  47616
+## 14 Sexual     113824
+## 15 Sexual     113824
+## 16 Sexual     113824
+## 17 Sexual     113824
+## 18 Sexual     113824
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(Step\_2\_merged, Account }\SpecialCharTok{==} \StringTok{"tea.cooper2"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Step}\FloatTok{.2}\NormalTok{, Likes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 30 x 2
+##    Step.2          Likes
+##    <fct>           <dbl>
+##  1 Athlete Action 123087
+##  2 Athlete Action 123087
+##  3 Femininity     113823
+##  4 Femininity     113823
+##  5 Athlete Action 186281
+##  6 Athlete Action 186281
+##  7 Athlete Action 186281
+##  8 Athlete Action 186281
+##  9 Athlete Action 186281
+## 10 Athlete Action  70946
+## # ... with 20 more rows
+\end{verbatim}
+
+\end{document}
