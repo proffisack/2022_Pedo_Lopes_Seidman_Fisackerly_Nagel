@@ -23,7 +23,7 @@ demographics <- read_csv(here("Data","0_Demographics.csv"))
 
 # Clean data and indicate factors
 
-# Clairified position
+# Clarified position
 
 demographics$Position[demographics$Position == "F/C"] <- "C/F"
 demographics$Position[demographics$Position == "G/F"] <- "F/G"
@@ -221,6 +221,22 @@ summary(lm.model_aa)
 
 # RUN AN ANALYSIS TO SEE IF NUMBER OF SEASONS/AGE/POSITION/NATIONALITY IMPACTS LIKES (INSTEAD OF GE GENDER
 # DIFFERENCES)
+
+# Running a t-test for Domestic/Nationality on Likes
+
+t.test(Step_2_merged$Likes ~ Step_2_merged$`Domestic/International`)
+
+# Not significant (0.218)
+
+# Running an ANOVA on position number of Likes
+
+summary(aov(Likes ~ Position, data = Step_2_merged))
+
+# It is significant! Let's do a Tukey to figure out why
+
+TukeyHSD((aov(Likes ~ Position, data = Step_2_merged)))
+
+aggregate(Step_2_merged$Likes, list(Step_2_merged$Position), FUN = mean)
 
 ```
 
