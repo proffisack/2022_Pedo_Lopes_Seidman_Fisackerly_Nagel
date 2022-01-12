@@ -222,6 +222,9 @@ summary(lm.model_aa)
 # RUN AN ANALYSIS TO SEE IF NUMBER OF SEASONS/AGE/POSITION/NATIONALITY IMPACTS LIKES (INSTEAD OF GE GENDER
 # DIFFERENCES)
 
+```
+
+```{r}
 # Running a t-test for Domestic/Nationality on Likes
 
 t.test(Step_2_merged$Likes ~ Step_2_merged$`Domestic/International`)
@@ -237,6 +240,26 @@ summary(aov(Likes ~ Position, data = Step_2_merged))
 TukeyHSD((aov(Likes ~ Position, data = Step_2_merged)))
 
 aggregate(Step_2_merged$Likes, list(Step_2_merged$Position), FUN = mean)
+
+# Still some NAs here (G)
+
+# Mean age
+
+mean(Step_2_merged$Age)
+
+# GGplot of age/likes
+
+library(ggpubr)
+
+cor.test(Step_2_merged$Age, Step_2_merged$Likes, method = "pearson", use = "complete.obs")
+
+Step_2_merged %>%
+ggplot(aes(x = Age, y = Likes)) +
+  geom_point(alpha = 0.3) +
+  scale_y_continuous(trans = "log10") +
+ # scale_y_continuous(trans = log2_trans(), breaks = trans_breaks("log", function(x) 2^x), 
+  #                   labels = trans_format("log2", math_format(2^.x))) +
+  stat_smooth(method = "lm")
 
 ```
 
