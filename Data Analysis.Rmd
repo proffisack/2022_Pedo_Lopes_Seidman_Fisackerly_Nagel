@@ -60,7 +60,7 @@ demographics <- filter(demographics, Use < 1)
 ```{r echo=FALSE}
 # Reading in coding
 
-coding <- read.csv(here("Data","1_Combined_Coding.csv")
+coding <- read.csv(here("Data","1_Combined_Coding_NEW.csv")
                     , stringsAsFactors = FALSE, fileEncoding = "latin1"
                    )
 
