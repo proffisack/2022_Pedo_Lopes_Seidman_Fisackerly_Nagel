@@ -4,6 +4,7 @@ authors: Wil Fisackerly, Alexia Pedo Lopes, Michael Seidman, Dr. Mark Nagel
 date: "September 7, 2021"
 output:
   html_notebook: default
+  pdf_document: default
 ---
 
 ```{r echo=FALSE}
@@ -188,6 +189,10 @@ Step.2.anova <-
 
 Step.2.anova
 
+# Mean likes
+
+aggregate(Step_2_merged$Likes, list(Step_2_merged$Step.2), FUN = mean)
+
 # Tukey comparison
 
 Step.2.tukey <- TukeyHSD((aov(Likes ~ Step.2, data = Step_2_merged)))
@@ -211,6 +216,9 @@ summary(lm.model)
 appear_anova <- merged %>%
   drop_na(Athlete.Appear)
 
+merged <- merged %>%
+  drop_na(Likes)
+
 summary(aov(Likes ~ Athlete.Appear, data = appear_anova))
 
 # Running a linear model
@@ -225,6 +233,14 @@ summary(lm.model_aa)
 ```
 
 ```{r}
+# Running an ANOVA on Step 1 and number of likes
+
+summary(aov(Likes ~ Step.1, data = merged))
+
+# Mean likes of Step 1
+
+aggregate(merged$Likes, list(merged$Step.1), FUN = mean)
+
 # Running a t-test for Domestic/Nationality on Likes
 
 t.test(Step_2_merged$Likes ~ Step_2_merged$`Domestic/International`)
@@ -233,7 +249,7 @@ t.test(Step_2_merged$Likes ~ Step_2_merged$`Domestic/International`)
 
 # Running an ANOVA on position number of Likes
 
-summary(aov(Likes ~ Position, data = Step_2_merged))
+summary(aov(Likes ~ Position, data = Step_2_merged)
 
 # It is significant! Let's do a Tukey to figure out why
 
@@ -253,6 +269,8 @@ library(ggpubr)
 
 cor.test(Step_2_merged$Age, Step_2_merged$Likes, method = "pearson", use = "complete.obs")
 
+lm(Age ~ Likes, data = Step_2_merged)
+
 Step_2_merged %>%
 ggplot(aes(x = Age, y = Likes)) +
   geom_point(alpha = 0.3) +
@@ -270,6 +288,8 @@ ANOVA is highly significant, thus the categories in Step 2 are statistically dif
 # A SIGNIFICANT DIFFERENCE IN NUMBER OF LIKES RECEIVED ACROSS SELF-PRESENTATION
 # CATEGORIES AT THE p < .05 SIGNIFICANCE LEVEL. NOTE: STEP 2 ONLY CATEGORIZES THE
 # PICTURES IN WHICH ATHLETES WERE PRESENT
+
+
 
 # NEED TO LOOK UP HOW TO REPORT TUKEY'S
 

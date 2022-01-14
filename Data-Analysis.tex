@@ -118,7 +118,7 @@
 \end{verbatim}
 
 \begin{verbatim}
-## v ggplot2 3.3.4     v purrr   0.3.4
+## v ggplot2 3.3.5     v purrr   0.3.4
 ## v tibble  3.1.2     v dplyr   1.0.7
 ## v tidyr   1.1.3     v stringr 1.4.0
 ## v readr   1.4.0     v forcats 0.5.1
@@ -158,10 +158,6 @@ Let's start by loading in the data
 ## )
 \end{verbatim}
 
-\begin{verbatim}
-## Warning: NAs introduced by coercion
-\end{verbatim}
-
 \includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-4-1.pdf}
 \includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-4-2.pdf}
 \includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-4-3.pdf}
@@ -185,11 +181,10 @@ Let's start by loading in the data
 
 \begin{verbatim}
 ##               Df    Sum Sq   Mean Sq F value Pr(>F)    
-## Step.2         5 1.336e+11 2.672e+10   41.45 <2e-16 ***
-## Residuals   1179 7.600e+11 6.446e+08                   
+## Step.2         5 1.256e+11 2.513e+10    40.5 <2e-16 ***
+## Residuals   1246 7.730e+11 6.204e+08                   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 6 observations deleted due to missingness
 \end{verbatim}
 
 \begin{Shaded}
@@ -210,21 +205,21 @@ Let's start by loading in the data
 ## 
 ## $Step.2
 ##                                           diff        lwr       upr     p adj
-## Dressed but Posed-Femininity         -580.7839  -9511.083  8349.515 0.9999696
-## Mixed Message-Femininity            -1930.7713 -12437.134  8575.591 0.9952079
-## Athlete Action-Femininity            1070.3085  -8705.728 10846.345 0.9996034
-## Non-Sport Setting-Femininity        -7095.9833 -16177.263  1985.296 0.2245246
-## Sexual-Femininity                   63248.7485  47486.789 79010.708 0.0000000
-## Mixed Message-Dressed but Posed     -1349.9875  -8797.526  6097.551 0.9955074
-## Athlete Action-Dressed but Posed     1651.0924  -4724.883  8027.067 0.9770143
-## Non-Sport Setting-Dressed but Posed -6515.1995 -11764.181 -1266.218 0.0054922
-## Sexual-Dressed but Posed            63829.5323  49918.331 77740.734 0.0000000
-## Athlete Action-Mixed Message         3001.0799  -5442.052 11444.212 0.9131705
-## Non-Sport Setting-Mixed Message     -5165.2120 -12793.136  2462.712 0.3824789
-## Sexual-Mixed Message                65179.5198  50207.715 80151.325 0.0000000
-## Non-Sport Setting-Athlete Action    -8166.2919 -14752.069 -1580.515 0.0055627
-## Sexual-Athlete Action               62178.4399  47709.778 76647.102 0.0000000
-## Sexual-Non-Sport Setting            70344.7318  56336.130 84353.334 0.0000000
+## Dressed but Posed-Femininity         -539.5279  -8849.246  7770.190 0.9999699
+## Mixed Message-Femininity            -1657.1213 -11599.946  8285.704 0.9969819
+## Non-Sport Setting-Femininity        -7083.9311 -15502.633  1334.771 0.1563497
+## Athlete Action-Femininity             562.8345  -8531.299  9656.968 0.9999763
+## Sexual-Femininity                   58842.3295  43994.167 73690.492 0.0000000
+## Mixed Message-Dressed but Posed     -1117.5933  -8400.831  6165.644 0.9979651
+## Non-Sport Setting-Dressed but Posed -6544.4032 -11550.431 -1538.375 0.0027311
+## Athlete Action-Dressed but Posed     1102.3625  -4971.272  7175.997 0.9954827
+## Sexual-Dressed but Posed            59381.8575  46166.197 72597.518 0.0000000
+## Non-Sport Setting-Mixed Message     -5426.8098 -12834.149  1980.529 0.2925624
+## Athlete Action-Mixed Message         2219.9558  -5946.891 10386.803 0.9715795
+## Sexual-Mixed Message                60499.4508  46200.428 74798.474 0.0000000
+## Athlete Action-Non-Sport Setting     7646.7656   1424.856 13868.676 0.0062184
+## Sexual-Non-Sport Setting            65926.2606  52641.803 79210.719 0.0000000
+## Sexual-Athlete Action               58279.4950  44557.048 72001.942 0.0000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -244,23 +239,22 @@ Let's start by loading in the data
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-## -72625  -9265  -4671  -1098 174826 
+## -67945  -9066  -4492  -1199 175059 
 ## 
 ## Coefficients:
 ##                                       Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)                            11930.3     2874.8   4.150 3.56e-05 ***
-## Step_2_merged$Step.2Dressed but Posed   -580.8     3128.6  -0.186   0.8528    
-## Step_2_merged$Step.2Mixed Message      -1930.8     3680.8  -0.525   0.6000    
-## Step_2_merged$Step.2Athlete Action      1070.3     3424.9   0.313   0.7547    
-## Step_2_merged$Step.2Non-Sport Setting  -7096.0     3181.5  -2.230   0.0259 *  
-## Step_2_merged$Step.2Sexual             63248.7     5522.0  11.454  < 2e-16 ***
+## (Intercept)                            11656.7     2655.2   4.390 1.23e-05 ***
+## Step_2_merged$Step.2Dressed but Posed   -539.5     2911.4  -0.185   0.8530    
+## Step_2_merged$Step.2Mixed Message      -1657.1     3483.6  -0.476   0.6344    
+## Step_2_merged$Step.2Non-Sport Setting  -7083.9     2949.6  -2.402   0.0165 *  
+## Step_2_merged$Step.2Athlete Action       562.8     3186.3   0.177   0.8598    
+## Step_2_merged$Step.2Sexual             58842.3     5202.3  11.311  < 2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 25390 on 1179 degrees of freedom
-##   (6 observations deleted due to missingness)
-## Multiple R-squared:  0.1495, Adjusted R-squared:  0.1459 
-## F-statistic: 41.45 on 5 and 1179 DF,  p-value: < 2.2e-16
+## Residual standard error: 24910 on 1246 degrees of freedom
+## Multiple R-squared:  0.1398, Adjusted R-squared:  0.1364 
+## F-statistic:  40.5 on 5 and 1246 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
 \begin{Shaded}
@@ -282,11 +276,10 @@ Let's start by loading in the data
 
 \begin{verbatim}
 ##                  Df    Sum Sq   Mean Sq F value  Pr(>F)   
-## Athlete.Appear    1 5.197e+09 5.197e+09   7.472 0.00635 **
-## Residuals      1329 9.244e+11 6.955e+08                   
+## Athlete.Appear    1 4.961e+09 4.961e+09   7.488 0.00629 **
+## Residuals      1403 9.295e+11 6.625e+08                   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 6 observations deleted due to missingness
 \end{verbatim}
 
 \begin{Shaded}
@@ -306,22 +299,21 @@ Let's start by loading in the data
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-## -11045  -9496  -7981  -2834 175127 
+## -10611  -9106  -7575  -2747 175561 
 ## 
 ## Coefficients:
 ##                                            Estimate Std. Error t value Pr(>|t|)
-## (Intercept)                                 11153.8      765.8  14.565  < 2e-16
-## appear_anova$Athlete.AppearDoes not appear  -6342.0     2320.2  -2.733  0.00635
+## (Intercept)                                 10719.6      727.2  14.742  < 2e-16
+## appear_anova$Athlete.AppearDoes not appear  -6049.6     2210.8  -2.736  0.00629
 ##                                               
 ## (Intercept)                                ***
 ## appear_anova$Athlete.AppearDoes not appear ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 26370 on 1329 degrees of freedom
-##   (6 observations deleted due to missingness)
-## Multiple R-squared:  0.005591,   Adjusted R-squared:  0.004842 
-## F-statistic: 7.472 on 1 and 1329 DF,  p-value: 0.006351
+## Residual standard error: 25740 on 1403 degrees of freedom
+## Multiple R-squared:  0.005309,   Adjusted R-squared:  0.0046 
+## F-statistic: 7.488 on 1 and 1403 DF,  p-value: 0.006289
 \end{verbatim}
 
 \begin{Shaded}
@@ -330,6 +322,161 @@ Let's start by loading in the data
 \CommentTok{\# DIFFERENCES)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Running a t{-}test for Domestic/Nationality on Likes}
+
+\FunctionTok{t.test}\NormalTok{(Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Step\_2\_merged}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Domestic/International}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  Step_2_merged$Likes by Step_2_merged$`Domestic/International`
+## t = 1.1196, df = 189.43, p-value = 0.2643
+## alternative hypothesis: true difference in means between group International and group Domestic is not equal to 0
+## 95 percent confidence interval:
+##  -2296.09  8324.16
+## sample estimates:
+## mean in group International      mean in group Domestic 
+##                    13356.02                    10341.98
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Not significant (0.218)}
+
+\CommentTok{\# Running an ANOVA on position number of Likes}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{aov}\NormalTok{(Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Position, }\AttributeTok{data =}\NormalTok{ Step\_2\_merged))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Df    Sum Sq   Mean Sq F value   Pr(>F)    
+## Position       4 2.762e+10 6.904e+09   9.883 7.13e-08 ***
+## Residuals   1247 8.711e+11 6.985e+08                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# It is significant! Let\textquotesingle{}s do a Tukey to figure out why}
+
+\FunctionTok{TukeyHSD}\NormalTok{((}\FunctionTok{aov}\NormalTok{(Likes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Position, }\AttributeTok{data =}\NormalTok{ Step\_2\_merged)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Likes ~ Position, data = Step_2_merged)
+## 
+## $Position
+##                diff        lwr       upr     p adj
+## C/F-F     4100.2868  -4980.873 13181.446 0.7317861
+## C-F      16935.1517   8658.154 25212.149 0.0000003
+## G-F       7943.4306   3112.149 12774.712 0.0000756
+## F/G-F     3348.1910  -4353.896 11050.278 0.7585979
+## C-C/F    12834.8649   1814.825 23854.905 0.0130148
+## G-C/F     3843.1438  -4890.348 12576.636 0.7501976
+## F/G-C/F   -752.0958 -11347.130  9842.938 0.9996847
+## G-C      -8991.7211 -16885.713 -1097.729 0.0162898
+## F/G-C   -13586.9607 -23501.393 -3672.528 0.0017724
+## F/G-G    -4595.2396 -11884.174  2693.695 0.4205615
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{aggregate}\NormalTok{(Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Likes, }\FunctionTok{list}\NormalTok{(Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Position), }\AttributeTok{FUN =}\NormalTok{ mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Group.1         x
+## 1       F  4992.518
+## 2     C/F  9092.805
+## 3       C 21927.670
+## 4       G 12935.949
+## 5     F/G  8340.709
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Still some NAs here (G)}
+
+\CommentTok{\# Mean age}
+
+\FunctionTok{mean}\NormalTok{(Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 27.50176
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# GGplot of age/likes}
+
+\FunctionTok{library}\NormalTok{(ggpubr)}
+
+\FunctionTok{cor.test}\NormalTok{(Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Age, Step\_2\_merged}\SpecialCharTok{$}\NormalTok{Likes, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  Step_2_merged$Age and Step_2_merged$Likes
+## t = -3.4371, df = 1250, p-value = 0.0006073
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.15134960 -0.04158072
+## sample estimates:
+##         cor 
+## -0.09675937
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lm}\NormalTok{(Age }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Likes, }\AttributeTok{data =}\NormalTok{ Step\_2\_merged)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Age ~ Likes, data = Step_2_merged)
+## 
+## Coefficients:
+## (Intercept)        Likes  
+##   2.767e+01   -1.531e-05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Step\_2\_merged }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ Likes)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{trans =} \StringTok{"log10"}\NormalTok{) }\SpecialCharTok{+}
+ \CommentTok{\# scale\_y\_continuous(trans = log2\_trans(), breaks = trans\_breaks("log", function(x) 2\^{}x), }
+  \CommentTok{\#                   labels = trans\_format("log2", math\_format(2\^{}.x))) +}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Data-Analysis_files/figure-latex/unnamed-chunk-6-1.pdf}
 
 ANOVA is highly significant, thus the categories in Step 2 are
 statistically different in their engagement
@@ -421,11 +568,11 @@ CONFIDENCE}\label{photo-and-the-number-of-likes-that-a-photo-receives-at-the-p-.
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 29 x 29
+## # A tibble: 31 x 29
 ##    Name  `Last Name` `First Name` Position `Height (cm.)` `Weight (kg)` Birthday
 ##    <chr> <chr>       <chr>        <fct>             <dbl>         <dbl> <chr>   
-##  1 Camb~ Cambage     Liz          C                   203            97 8/18/91 
-##  2 Camb~ Cambage     Liz          C                   203            97 8/18/91 
+##  1 Anig~ Anigwe      Kristine     C/F                 193            90 3/31/97 
+##  2 Anig~ Anigwe      Kristine     C/F                 193            90 3/31/97 
 ##  3 Camb~ Cambage     Liz          C                   203            97 8/18/91 
 ##  4 Camb~ Cambage     Liz          C                   203            97 8/18/91 
 ##  5 Camb~ Cambage     Liz          C                   203            97 8/18/91 
@@ -434,9 +581,9 @@ CONFIDENCE}\label{photo-and-the-number-of-likes-that-a-photo-receives-at-the-p-.
 ##  8 Camb~ Cambage     Liz          C                   203            97 8/18/91 
 ##  9 Camb~ Cambage     Liz          C                   203            97 8/18/91 
 ## 10 Camb~ Cambage     Liz          C                   203            97 8/18/91 
-## # ... with 19 more rows, and 22 more variables: Age <dbl>, Nationality <fct>,
+## # ... with 21 more rows, and 22 more variables: Age <dbl>, Nationality <fct>,
 ## #   Domestic/International <fct>, College <chr>,
-## #   Current WNBA Team (or Last) <fct>, Draft Pick <dbl>, Draft Year <int>,
+## #   Current WNBA Team (or Last) <fct>, Draft Pick <dbl>, Draft Year <dbl>,
 ## #   Year Started <dbl>, Seasons in League <dbl>, Active/2021 <fct>,
 ## #   Played in 2020? <fct>, Use <dbl>, Account <chr>, Photo.Date <chr>,
 ## #   Likes <dbl>, Step.1 <fct>, Social.Cause <fct>, Caption <chr>, Step.2 <fct>,
@@ -464,14 +611,14 @@ CONFIDENCE}\label{photo-and-the-number-of-likes-that-a-photo-receives-at-the-p-.
 ##  8 Sexual      92495
 ##  9 Sexual     106527
 ## 10 Sexual     106527
-## 11 Femininity  95161
-## 12 Femininity  47616
-## 13 Femininity  47616
+## 11 Sexual     113824
+## 12 Sexual     113824
+## 13 Sexual     113824
 ## 14 Sexual     113824
 ## 15 Sexual     113824
-## 16 Sexual     113824
-## 17 Sexual     113824
-## 18 Sexual     113824
+## 16 Femininity  95161
+## 17 Femininity  47616
+## 18 Femininity  47616
 \end{verbatim}
 
 \begin{Shaded}
@@ -483,19 +630,34 @@ CONFIDENCE}\label{photo-and-the-number-of-likes-that-a-photo-receives-at-the-p-.
 
 \begin{verbatim}
 ## # A tibble: 30 x 2
-##    Step.2          Likes
-##    <fct>           <dbl>
-##  1 Athlete Action 123087
-##  2 Athlete Action 123087
-##  3 Femininity     113823
-##  4 Femininity     113823
-##  5 Athlete Action 186281
-##  6 Athlete Action 186281
-##  7 Athlete Action 186281
-##  8 Athlete Action 186281
-##  9 Athlete Action 186281
-## 10 Athlete Action  70946
+##    Step.2             Likes
+##    <fct>              <dbl>
+##  1 Sexual            137463
+##  2 Sexual            137463
+##  3 Sexual            137463
+##  4 Femininity        113823
+##  5 Femininity        113823
+##  6 Femininity         68445
+##  7 Femininity         68445
+##  8 Femininity        122338
+##  9 Mixed Message     157391
+## 10 Dressed but Posed 186176
 ## # ... with 20 more rows
 \end{verbatim}
+
+\hypertarget{create-a-table-for-mean-number-of-likes-for-each-category-step-1-and-2}{%
+\section{CREATE A TABLE FOR MEAN NUMBER OF LIKES FOR EACH CATEGORY (STEP
+1 AND
+2)}\label{create-a-table-for-mean-number-of-likes-for-each-category-step-1-and-2}}
+
+\hypertarget{t-test-for-only-two-conditions-i.e.-athlete-appear}{%
+\section{T-test for only two conditions (i.e.~athlete
+appear)}\label{t-test-for-only-two-conditions-i.e.-athlete-appear}}
+
+\hypertarget{nationality}{%
+\section{Nationality}\label{nationality}}
+
+\hypertarget{position}{%
+\section{Position}\label{position}}
 
 \end{document}
