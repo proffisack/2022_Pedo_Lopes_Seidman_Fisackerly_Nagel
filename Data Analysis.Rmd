@@ -26,8 +26,13 @@ demographics <- read_csv(here("Data","0_Demographics.csv"))
 
 # Clarified position
 
-demographics$Position[demographics$Position == "F/C"] <- "C/F"
-demographics$Position[demographics$Position == "G/F"] <- "F/G"
+# demographics$Position[demographics$Position == "F/C"] <- "C/F"
+# demographics$Position[demographics$Position == "G/F"] <- "F/G"
+
+demographics$Position[demographics$Position == "F/C"] <- "F"
+demographics$Position[demographics$Position == "G/F"] <- "G"
+demographics$Position[demographics$Position == "C/F"] <- "C"
+demographics$Position[demographics$Position == "F/G"] <- "F"
 
 demographics$Position <- as_factor(demographics$Position)
 
@@ -249,7 +254,7 @@ t.test(Step_2_merged$Likes ~ Step_2_merged$`Domestic/International`)
 
 # Running an ANOVA on position number of Likes
 
-summary(aov(Likes ~ Position, data = Step_2_merged)
+summary(aov(Likes ~ Position, data = Step_2_merged))
 
 # It is significant! Let's do a Tukey to figure out why
 
@@ -326,4 +331,52 @@ filter(Step_2_merged, Account == "tea.cooper2") %>%
 # Nationality
 
 # Position
+
+```{r}
+# ANOVA for Age and Step. 1.
+
+Age.anova <- drop_na(merged)
+
+Age.anova <-
+  summary(aov(Age ~ Step.1, data = merged))
+
+Age.anova
+
+# Mean age
+
+Age_means_s1 <- aggregate(merged$Age, list(merged$Step.1), FUN = mean)
+Age_sd_s1 <- aggregate(merged$Age, list(merged$Step.1), FUN = sd)
+Age_means_s1
+Age_sd_s1
+
+# Just ANOVA for personal life and business life
+
+Age_merge.anova <-
+  summary(aov(Age ~ Step.1, data = Step_2_merged))
+
+Age_merge.anova
+
+# Tukey comparison
+
+AgeStep.1.tukey <- TukeyHSD((aov(Age ~ Step.1, data = merged)))
+
+AgeStep.1.tukey
+
+# Chi-Square for Nationality and Step. 1.
+
+Nat.cs <- chisq.test(merged$`Domestic/International`, merged$Step.1,)
+
+Nat.cs
+
+NAT_table <- table(merged$`Domestic/International`, merged$Step.1)
+
+# Chi-Square for Age and Step 1.
+
+Pos.cs <- chisq.test(merged$Position, merged$Step.1,)
+
+Pos.cs
+
+POS_table <- table(merged$Position, merged$Step.1)
+
+```
 
